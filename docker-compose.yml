@@ -1,0 +1,16 @@
+version: '3'
+services:
+  redis:
+    image: "redis:alpine"
+  web:
+    build: .
+    command: npm start
+    ports:
+      - "49160:8001"
+    links:
+      - redis 
+  preview:
+    build: ./docker-static
+    command: service nginx start
+    ports:
+      - "49161:90"
